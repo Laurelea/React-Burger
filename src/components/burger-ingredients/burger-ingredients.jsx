@@ -25,13 +25,28 @@ function Burgeringredients(props) {
       <ul>
         <h3>Булки</h3>
         <ul>
-          {props.data.map((ingredient) => (
-            <BurgerIngredient data={ingredient} />
-          ))}
+          {props.data
+            .filter((data) => data.type === 'bun')
+            .map((ingredient) => (
+              <BurgerIngredient data={ingredient} />
+            ))}
         </ul>
         <h3>Соусы</h3>
-        <ul></ul>
+        <ul>
+          {props.data
+            .filter((data) => data.type === 'sauce')
+            .map((ingredient) => (
+              <BurgerIngredient data={ingredient} />
+            ))}
+        </ul>
         <h3>Начинки</h3>
+        <ul>
+          {props.data
+            .filter((data) => data.type === 'main')
+            .map((ingredient) => (
+              <BurgerIngredient data={ingredient} />
+            ))}
+        </ul>
       </ul>
     </section>
   );
