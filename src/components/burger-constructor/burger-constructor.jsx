@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { typeOfIngridient } from '../../utils/propTypes.js';
+import { typeOfingredient } from '../../utils/propTypes.js';
 import {
   ConstructorElement,
   DragIcon,
@@ -13,7 +13,7 @@ import { data } from '../../utils/data';
 function BurgerConstructor() {}
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(typeOfIngridient).isRequired,
+  data: PropTypes.arrayOf(typeOfingredient).isRequired,
 };
 
 export default BurgerConstructor;

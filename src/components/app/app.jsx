@@ -2,7 +2,7 @@ import { React, useEffect, useState } from 'react';
 // import appStyles from './app.module.css';
 import { data } from '../../utils/data';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import BurgerIngridients from '../burger-ingridients/burger-ingridients';
+import Burgeringredients from '../burger-ingredients/burger-ingredients';
 import { AppHeader } from '../app-header/app-header';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <>
       <AppHeader />
       <BurgerConstructor />
-      <BurgerIngridients />
+      <Burgeringredients data={data} />
     </>
   );
 }
