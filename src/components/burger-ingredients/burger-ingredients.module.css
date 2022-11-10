@@ -1,0 +1,5 @@
+.ingredientsList {
+  height: 83vh;
+  overflow-y: auto;
+  max-height: 716px;
+}

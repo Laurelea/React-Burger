@@ -8,8 +8,6 @@ import {
 import stylesForBurgeringredient from './burger-ingredient.module.css';
 
 function BurgerIngredient(props) {
-  console.log(props);
-
   return (
     <li className={`mb-8`}>
       <img

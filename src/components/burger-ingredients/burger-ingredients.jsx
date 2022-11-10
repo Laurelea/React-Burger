@@ -22,7 +22,7 @@ function Burgeringredients(props) {
           Начинки
         </Tab>
       </div>
-      <ul>
+      <ul className={stylesForBurgeringredients.ingredientsList}>
         <h3>Булки</h3>
         <ul>
           {props.data
