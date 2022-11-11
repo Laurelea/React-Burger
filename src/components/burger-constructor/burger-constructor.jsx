@@ -10,9 +10,8 @@ import {
 import stylesForBurgerConstructor from './burger-constructor.module.css';
 
 function BurgerConstructor(props) {
-  const dataOfIngredients = props.data.slice(1);
   return (
-    <div className={stylesForBurgerConstructor.list}>
+    <section className={stylesForBurgerConstructor.list}>
       <ConstructorElement
         type="top"
         isLocked={true}
@@ -20,32 +19,17 @@ function BurgerConstructor(props) {
         price={200}
         thumbnail={props.data[0].image}
       />
-      {dataOfIngredients.map((ingredient) => (
-        <ConstructorElement
-          text={ingredient.name}
-          price={ingredient.price}
-          thumbnail={ingredient.image}
-        />
-      ))}
-      {/* <ConstructorElement
-        type="top"
-        isLocked={true}
-        text="Краторная булка N-200i (верх)"
-        price={200}
-        thumbnail={}
-      />
-      <ConstructorElement
-        text="Краторная булка N-200i (верх)"
-        price={50}
-        thumbnail={}
-      />
-      <ConstructorElement
-        type="bottom"
-        isLocked={true}
-        text="Краторная булка N-200i (низ)"
-        price={200}
-        thumbnail={}
-      /> */}
+      <ul>
+        {props.data.slice(1).map((ingredient) => (
+          <li key={ingredient._id}>
+            <ConstructorElement
+              text={ingredient.name}
+              price={ingredient.price}
+              thumbnail={ingredient.image}
+            />
+          </li>
+        ))}
+      </ul>
       <ConstructorElement
         type="bottom"
         isLocked={true}
@@ -53,7 +37,7 @@ function BurgerConstructor(props) {
         price={200}
         thumbnail={props.data[0].image}
       />
-    </div>
+    </section>
   );
 }
 

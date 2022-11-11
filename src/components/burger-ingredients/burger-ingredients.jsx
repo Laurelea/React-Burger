@@ -5,7 +5,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesForBurgeringredients from './burger-ingredients.module.css';
 import BurgerIngredient from '../burger-ingredient/burger-ingredient.jsx';
 
-function Burgeringredients(props) {
+function BurgerIngredients(props) {
   const [current, setCurrent] = useState('bun');
 
   return (
@@ -28,7 +28,9 @@ function Burgeringredients(props) {
           {props.data
             .filter((data) => data.type === 'bun')
             .map((ingredient) => (
-              <BurgerIngredient data={ingredient} />
+              <li key={ingredient._id}>
+                <BurgerIngredient data={ingredient} />
+              </li>
             ))}
         </ul>
         <h3>Соусы</h3>
@@ -36,7 +38,9 @@ function Burgeringredients(props) {
           {props.data
             .filter((data) => data.type === 'sauce')
             .map((ingredient) => (
-              <BurgerIngredient data={ingredient} />
+              <li key={ingredient._id}>
+                <BurgerIngredient data={ingredient} />
+              </li>
             ))}
         </ul>
         <h3>Начинки</h3>
@@ -44,7 +48,9 @@ function Burgeringredients(props) {
           {props.data
             .filter((data) => data.type === 'main')
             .map((ingredient) => (
-              <BurgerIngredient data={ingredient} />
+              <li key={ingredient._id}>
+                <BurgerIngredient data={ingredient} />
+              </li>
             ))}
         </ul>
       </ul>
@@ -52,8 +58,8 @@ function Burgeringredients(props) {
   );
 }
 
-Burgeringredients.propTypes = {
+BurgerIngredients.propTypes = {
   data: PropTypes.arrayOf(typeOfingredient).isRequired,
 };
 
-export default Burgeringredients;
+export default BurgerIngredients;

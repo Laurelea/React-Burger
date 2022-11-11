@@ -9,7 +9,7 @@ import stylesForBurgeringredient from './burger-ingredient.module.css';
 
 function BurgerIngredient(props) {
   return (
-    <li className={`mb-8`}>
+    <>
       <img
         className={`pr-4 pl-4`}
         src={props.data.image}
@@ -21,7 +21,7 @@ function BurgerIngredient(props) {
       </div>
       <p className={'text text_type_main-default'}>{props.data.name}</p>
       <Counter count={1} size={'default'} />
-    </li>
+    </>
   );
 }
 
