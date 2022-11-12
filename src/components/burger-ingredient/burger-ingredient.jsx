@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { typeOfingredient } from '../../utils/propTypes.js';
 import {
@@ -9,7 +9,11 @@ import stylesForBurgeringredient from './burger-ingredient.module.css';
 
 function BurgerIngredient(props) {
   return (
-    <>
+    <div
+      onClick={() => {
+        props.openModal(props.data);
+      }}
+    >
       <img
         className={`pr-4 pl-4`}
         src={props.data.image}
@@ -20,7 +24,7 @@ function BurgerIngredient(props) {
         <CurrencyIcon type={'primary'} />
       </div>
       <p className={'text text_type_main-default'}>{props.data.name}</p>
-    </>
+    </div>
   );
 }
 

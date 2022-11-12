@@ -8,8 +8,15 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesForBurgerConstructor from './burger-constructor.module.css';
+import Modal from '../modal/modal';
+import OrderDetails from '../order-details/order-details';
 
 function BurgerConstructor(props) {
+  const [isOrderModalVis, setOrderModalVis] = useState(false);
+  const closeOrderModal = () => {
+    setOrderModalVis(false);
+  };
+
   return (
     <section
       className={`${stylesForBurgerConstructor.constructorSection} mt-25 ml-4 mr-4`}
@@ -56,12 +63,18 @@ function BurgerConstructor(props) {
             htmlType="button"
             type="primary"
             size="large"
-            onClick={() => {}}
+            onClick={() => {
+              setOrderModalVis(true);
+              console.log('press');
+            }}
           >
             Оформить заказ
           </Button>
         </div>
       </div>
+      <Modal isActive={isOrderModalVis} closeModal={closeOrderModal}>
+        <OrderDetails />
+      </Modal>
     </section>
   );
 }
