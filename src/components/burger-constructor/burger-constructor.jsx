@@ -11,17 +11,25 @@ import stylesForBurgerConstructor from './burger-constructor.module.css';
 
 function BurgerConstructor(props) {
   return (
-    <section className={stylesForBurgerConstructor.list}>
-      <ConstructorElement
-        type="top"
-        isLocked={true}
-        text="Краторная булка N-200i (верх)"
-        price={200}
-        thumbnail={props.data[0].image}
-      />
-      <ul>
+    <section
+      className={`${stylesForBurgerConstructor.constructorSection} mt-25 ml-4 mr-4`}
+    >
+      <div className={`ml-8`}>
+        <ConstructorElement
+          type="top"
+          isLocked={true}
+          text="Краторная булка N-200i (верх)"
+          price={200}
+          thumbnail={props.data[0].image}
+        />
+      </div>
+      <ul className={`${stylesForBurgerConstructor.list}`}>
         {props.data.slice(1).map((ingredient) => (
-          <li key={ingredient._id}>
+          <li
+            key={ingredient._id}
+            className={`${stylesForBurgerConstructor.listItem} mb-4`}
+          >
+            <DragIcon type="primary" />
             <ConstructorElement
               text={ingredient.name}
               price={ingredient.price}
@@ -30,13 +38,30 @@ function BurgerConstructor(props) {
           </li>
         ))}
       </ul>
-      <ConstructorElement
-        type="bottom"
-        isLocked={true}
-        text="Краторная булка N-200i (низ)"
-        price={200}
-        thumbnail={props.data[0].image}
-      />
+      <div className={`ml-8`}>
+        <ConstructorElement
+          type="bottom"
+          isLocked={true}
+          text="Краторная булка N-200i (низ)"
+          price={200}
+          thumbnail={props.data[0].image}
+        />
+      </div>
+      <div className={`${stylesForBurgerConstructor.checkWrapper} mt-10`}>
+        <div className={`${stylesForBurgerConstructor.checkSummary}`}>
+          <p className={`text text_type_digits-medium mr-2`}>610</p>
+          <CurrencyIcon type="primary" />
+          <span className={`text text_type_digits-medium ml-10`}></span>
+          <Button
+            htmlType="button"
+            type="primary"
+            size="large"
+            onClick={() => {}}
+          >
+            Оформить заказ
+          </Button>
+        </div>
+      </div>
     </section>
   );
 }

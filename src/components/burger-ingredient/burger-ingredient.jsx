@@ -25,8 +25,8 @@ function BurgerIngredient(props) {
   );
 }
 
-BurgerIngredient.propTypes = {
-  data: PropTypes.arrayOf(typeOfingredient).isRequired,
-};
+// BurgerIngredient.propTypes = {
+//   data: PropTypes.arrayOf(typeOfingredient).isRequired,
+// };
 
 export default BurgerIngredient;
