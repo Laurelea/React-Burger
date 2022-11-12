@@ -1,4 +1,8 @@
-.modalWrapper {}
+.modalWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .modalHeader {
   height: 64px;
@@ -12,7 +16,7 @@
 .modalClose {
   position: absolute;
   top: 60px;
-  right: 45px;
+  right: 40px;
   z-index: 10;
   cursor: pointer;
   transition: .2s;

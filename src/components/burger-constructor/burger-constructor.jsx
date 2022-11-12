@@ -65,7 +65,6 @@ function BurgerConstructor(props) {
             size="large"
             onClick={() => {
               setOrderModalVis(true);
-              console.log('press');
             }}
           >
             Оформить заказ

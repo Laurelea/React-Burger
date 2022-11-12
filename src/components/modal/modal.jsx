@@ -18,8 +18,12 @@ const Modal = (props) => {
   }, [props.closeModal]);
 
   return ReactDOM.createPortal(
-    <ModalOverlay isActive={props.isActive} onClick={props.closeModal}>
-      <div className={stylesForModal.modalWrapper}>
+    <ModalOverlay
+      isActive={props.isActive}
+      onClick={props.closeModal}
+      closeModal={props.closeModal}
+    >
+      <div className={stylesForModal.modalContainer}>
         {props.title && (
           <h3 className={`text_type_main-large ${stylesForModal.modalHeader}`}>
             {props.title}
@@ -27,9 +31,8 @@ const Modal = (props) => {
         )}
         <div className={stylesForModal.modalClose} onClick={props.closeModal}>
           <CloseIcon className type="primary" />
-
-          <div className={stylesForModal.modalContainer}>{props.children}</div>
         </div>
+        <div className={stylesForModal.modalWrapper}>{props.children}</div>
       </div>
     </ModalOverlay>,
     MODAL_ROOT
