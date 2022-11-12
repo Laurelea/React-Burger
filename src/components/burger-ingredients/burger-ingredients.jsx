@@ -23,36 +23,42 @@ function BurgerIngredients(props) {
         </Tab>
       </div>
       <ul className={stylesForBurgeringredients.ingredientsList}>
-        <h3>Булки</h3>
-        <ul>
-          {props.data
-            .filter((data) => data.type === 'bun')
-            .map((ingredient) => (
-              <li key={ingredient._id}>
-                <BurgerIngredient data={ingredient} />
-              </li>
-            ))}
-        </ul>
-        <h3>Соусы</h3>
-        <ul>
-          {props.data
-            .filter((data) => data.type === 'sauce')
-            .map((ingredient) => (
-              <li key={ingredient._id}>
-                <BurgerIngredient data={ingredient} />
-              </li>
-            ))}
-        </ul>
-        <h3>Начинки</h3>
-        <ul>
-          {props.data
-            .filter((data) => data.type === 'main')
-            .map((ingredient) => (
-              <li key={ingredient._id}>
-                <BurgerIngredient data={ingredient} />
-              </li>
-            ))}
-        </ul>
+        <li>
+          <h3 className={`${stylesForBurgeringredients.typeHeader} `}>Булки</h3>
+          <ul className={stylesForBurgeringredients.ingredientsByType}>
+            {props.data
+              .filter((data) => data.type === 'bun')
+              .map((ingredient) => (
+                <li key={ingredient._id}>
+                  <BurgerIngredient data={ingredient} />
+                </li>
+              ))}
+          </ul>
+        </li>
+        <li>
+          <h3>Соусы</h3>
+          <ul className={stylesForBurgeringredients.ingredientsByType}>
+            {props.data
+              .filter((data) => data.type === 'sauce')
+              .map((ingredient) => (
+                <li key={ingredient._id}>
+                  <BurgerIngredient data={ingredient} />
+                </li>
+              ))}
+          </ul>
+        </li>
+        <li>
+          <h3>Начинки</h3>
+          <ul className={stylesForBurgeringredients.ingredientsByType}>
+            {props.data
+              .filter((data) => data.type === 'main')
+              .map((ingredient) => (
+                <li key={ingredient._id}>
+                  <BurgerIngredient data={ingredient} />
+                </li>
+              ))}
+          </ul>
+        </li>
       </ul>
     </section>
   );

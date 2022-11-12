@@ -4,6 +4,8 @@
   max-height: 716px;
   scrollbar-color: #8585AD #2F2F37;
   scrollbar-width: thin;
+  list-style-type: none;
+
 }
 
 .ingredientsList::-webkit-scrollbar {
@@ -16,4 +18,16 @@
 
 .ingredientsList::-webkit-scrollbar-track {
   background: #2F2F37;
+}
+
+.ingredientsByType {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.typeHeader {
+  margin: 0;
+  padding: 0;
 }

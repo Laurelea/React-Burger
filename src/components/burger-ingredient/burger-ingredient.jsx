@@ -20,7 +20,6 @@ function BurgerIngredient(props) {
         <CurrencyIcon type={'primary'} />
       </div>
       <p className={'text text_type_main-default'}>{props.data.name}</p>
-      <Counter count={1} size={'default'} />
     </>
   );
 }
