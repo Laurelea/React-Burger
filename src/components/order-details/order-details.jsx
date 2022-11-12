@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import stylesForOrderDetails from './order-details.module.css';
 import PropTypes from 'prop-types';
 import imageOrderDone from '../../images/done.svg';
 
-const OrderDetails = (props) => {
+const OrderDetails = () => {
   return (
     <div className={`${stylesForOrderDetails.orderDetailsWrapper}`}>
       <p
@@ -28,9 +28,5 @@ const OrderDetails = (props) => {
     </div>
   );
 };
-
-// OrderDetails.propTypes = {
-
-// };
 
 export default OrderDetails;

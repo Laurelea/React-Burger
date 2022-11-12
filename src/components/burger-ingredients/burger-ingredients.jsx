@@ -24,7 +24,11 @@ function BurgerIngredients(props) {
       </div>
       <ul className={stylesForBurgeringredients.ingredientsList}>
         <li>
-          <h3 className={`${stylesForBurgeringredients.typeHeader} `}>Булки</h3>
+          <h3
+            className={`${stylesForBurgeringredients.typeHeader} text text_type_main-medium`}
+          >
+            Булки
+          </h3>
           <ul className={stylesForBurgeringredients.ingredientsByType}>
             {props.data
               .filter((data) => data.type === 'bun')
@@ -36,7 +40,11 @@ function BurgerIngredients(props) {
           </ul>
         </li>
         <li>
-          <h3>Соусы</h3>
+          <h3
+            className={`${stylesForBurgeringredients.typeHeader} text text_type_main-medium`}
+          >
+            Соусы
+          </h3>
           <ul className={stylesForBurgeringredients.ingredientsByType}>
             {props.data
               .filter((data) => data.type === 'sauce')
@@ -48,7 +56,11 @@ function BurgerIngredients(props) {
           </ul>
         </li>
         <li>
-          <h3>Начинки</h3>
+          <h3
+            className={`${stylesForBurgeringredients.typeHeader} text text_type_main-medium`}
+          >
+            Начинки
+          </h3>
           <ul className={stylesForBurgeringredients.ingredientsByType}>
             {props.data
               .filter((data) => data.type === 'main')

@@ -24,11 +24,6 @@ const Modal = (props) => {
       closeModal={props.closeModal}
     >
       <div className={stylesForModal.modalContainer}>
-        {props.title && (
-          <h3 className={`text_type_main-large ${stylesForModal.modalHeader}`}>
-            {props.title}
-          </h3>
-        )}
         <div className={stylesForModal.modalClose} onClick={props.closeModal}>
           <CloseIcon className type="primary" />
         </div>
@@ -39,10 +34,10 @@ const Modal = (props) => {
   );
 };
 
-Modal.defaultProps = {
-  title: '',
+Modal.propTypes = {
+  children: PropTypes.node.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  closeModal: PropTypes.func.isRequired,
 };
-
-// Modal.propTypes = {};
 
 export default Modal;

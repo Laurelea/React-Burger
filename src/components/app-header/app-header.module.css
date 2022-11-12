@@ -19,8 +19,8 @@
 }
 
 .nav {
-  width: 56%;
+  width: 1280px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
