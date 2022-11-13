@@ -9,7 +9,7 @@ const ModalOverlay = (props) => {
     }
   };
 
-  let modalCurrentStyle = props.isActive
+  const modalCurrentStyle = props.isActive
     ? `${stylesForModalOverlay.modalOverlay} ${stylesForModalOverlay.modalOverlay_active}`
     : `${stylesForModalOverlay.modalOverlay}`;
 

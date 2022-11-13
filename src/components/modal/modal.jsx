@@ -8,6 +8,8 @@ import { MODAL_ROOT } from '../../utils/constants';
 
 const Modal = (props) => {
   useEffect(() => {
+    if (!props.isActive) return;
+
     const pressEsc = (event) => {
       event.key === 'Escape' && props.closeModal();
     };
@@ -15,7 +17,7 @@ const Modal = (props) => {
     return () => {
       document.removeEventListener('keydown', pressEsc);
     };
-  }, [props.closeModal]);
+  }, [props.closeModal, props.isActive]);
 
   return ReactDOM.createPortal(
     <ModalOverlay

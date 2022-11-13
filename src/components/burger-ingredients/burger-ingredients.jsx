@@ -4,14 +4,29 @@ import { typeOfingredient } from '../../utils/propTypes.js';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesForBurgeringredients from './burger-ingredients.module.css';
 import BurgerIngredient from '../burger-ingredient/burger-ingredient.jsx';
+import Modal from '../modal/modal.jsx';
+import IngredientDetails from '../ingredient-details/ingredient-details.jsx';
 
 function BurgerIngredients(props) {
   const [current, setCurrent] = useState('bun');
 
+  const [isModalIngredientOpen, setModalIngredientOpen] = useState(false);
+
+  const [selectedIngredient, setSelectedIngredient] = useState({});
+
+  const openModalIngredient = (item) => {
+    setSelectedIngredient(item);
+    setModalIngredientOpen(true);
+  };
+
+  const closeModalIngredient = () => {
+    setModalIngredientOpen(false);
+  };
+
   return (
     <section>
       <h2 className="text text_type_main-large mb-5">Соберите бургер</h2>
-      <div style={{ display: 'flex' }}>
+      <div className={`${stylesForBurgeringredients.tabs}`}>
         <Tab value="bun" active={current === 'bun'} onClick={setCurrent}>
           Булки
         </Tab>
@@ -34,7 +49,11 @@ function BurgerIngredients(props) {
               .filter((data) => data.type === 'bun')
               .map((ingredient) => (
                 <li key={ingredient._id}>
-                  <BurgerIngredient data={ingredient} />
+                  <BurgerIngredient
+                    data={ingredient}
+                    openModalIngredient={openModalIngredient}
+                    id={ingredient._id}
+                  />
                 </li>
               ))}
           </ul>
@@ -50,7 +69,10 @@ function BurgerIngredients(props) {
               .filter((data) => data.type === 'sauce')
               .map((ingredient) => (
                 <li key={ingredient._id}>
-                  <BurgerIngredient data={ingredient} />
+                  <BurgerIngredient
+                    data={ingredient}
+                    openModalIngredient={openModalIngredient}
+                  />
                 </li>
               ))}
           </ul>
@@ -66,12 +88,18 @@ function BurgerIngredients(props) {
               .filter((data) => data.type === 'main')
               .map((ingredient) => (
                 <li key={ingredient._id}>
-                  <BurgerIngredient data={ingredient} />
+                  <BurgerIngredient
+                    data={ingredient}
+                    openModalIngredient={openModalIngredient}
+                  />
                 </li>
               ))}
           </ul>
         </li>
       </ul>
+      <Modal isActive={isModalIngredientOpen} closeModal={closeModalIngredient}>
+        <IngredientDetails data={selectedIngredient} />
+      </Modal>
     </section>
   );
 }

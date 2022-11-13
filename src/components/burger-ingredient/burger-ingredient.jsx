@@ -6,24 +6,13 @@ import {
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesForBurgeringredient from './burger-ingredient.module.css';
-import Modal from '../modal/modal.jsx';
-import IngredientDetails from '../ingredient-details/ingredient-details.jsx';
 
 function BurgerIngredient(props) {
-  const [isModalIngredientOpen, setModalIngredientOpen] = useState(false);
-
-  const openModalIngredient = () => {
-    setModalIngredientOpen(true);
-  };
-
-  const closeModalIngredient = () => {
-    setModalIngredientOpen(false);
-  };
-
   return (
     <div
       className={`${stylesForBurgeringredient.ingredientWrap}`}
-      onClick={openModalIngredient}
+      id={props.data.id}
+      onClick={() => props.openModalIngredient(props.data)}
     >
       {props.data.name === 'Краторная булка N-200i' && (
         <Counter count={1} size="default" extraClass="m-1" />
@@ -43,9 +32,6 @@ function BurgerIngredient(props) {
         <CurrencyIcon type={'primary'} />
       </div>
       <p className={'text text_type_main-default'}>{props.data.name}</p>
-      <Modal isActive={isModalIngredientOpen} closeModal={closeModalIngredient}>
-        <IngredientDetails data={props.data} />
-      </Modal>
     </div>
   );
 }

@@ -31,19 +31,21 @@ function BurgerConstructor(props) {
         />
       </div>
       <ul className={`${stylesForBurgerConstructor.list}`}>
-        {props.data.slice(1).map((ingredient) => (
-          <li
-            key={ingredient._id}
-            className={`${stylesForBurgerConstructor.listItem} mb-4`}
-          >
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text={ingredient.name}
-              price={ingredient.price}
-              thumbnail={ingredient.image}
-            />
-          </li>
-        ))}
+        {props.data
+          .filter((igredient) => igredient.type !== 'bun')
+          .map((ingredient) => (
+            <li
+              key={ingredient._id}
+              className={`${stylesForBurgerConstructor.listItem} mb-4`}
+            >
+              <DragIcon type="primary" />
+              <ConstructorElement
+                text={ingredient.name}
+                price={ingredient.price}
+                thumbnail={ingredient.image}
+              />
+            </li>
+          ))}
       </ul>
       <div className={`ml-8`}>
         <ConstructorElement
