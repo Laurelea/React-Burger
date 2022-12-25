@@ -4,33 +4,46 @@ import { URL_API } from '../../utils/constants';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import { AppHeader } from '../app-header/app-header';
+import { connect } from "react-redux";
+import { getAllIngredients } from "../../services/actions";
 
-function App() {
-  const [ingredients, setIngredients] = useState([]);
-
+const App = (props) => {
+    console.log(11, props)
+  // const [state, setState] = useState({
+  //     ingredients: props.allIngredients || []
+  // });
   useEffect(() => {
-    fetch(URL_API)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
-      .then((res) => setIngredients(res.data))
-      .catch((err) => console.error(err));
-  }, []);
+    props.getAllIngredients();
+  }, [])
+    // useEffect(() => {
+  //   fetch(URL_API)
+  //     .then((res) => {
+  //       if (res.ok) {
+  //         return res.json();
+  //       }
+  //       return Promise.reject(res.status);
+  //     })
+  //     .then((res) => setState({
+  //         ...state,
+  //         ingredients: res.data
+  //     }))
+  //     .catch((err) => console.error(err));
+  // }, [])
+
 
   return (
     <>
       <AppHeader />
-      {ingredients.length && (
+      {props.allIngredients.length && (
         <main className={appStyles.mainGrid}>
-          <BurgerIngredients data={ingredients} />
-          <BurgerConstructor data={ingredients} />
+          <BurgerIngredients data={props.allIngredients} />
+          <BurgerConstructor data={props.allIngredients} />
         </main>
       )}
     </>
   );
 }
 
-export default App;
+export default connect(state => ({
+    allIngredients: state.allIngredients
+}), { getAllIngredients })(App);
