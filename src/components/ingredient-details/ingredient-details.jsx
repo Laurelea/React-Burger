@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import stylesForIngredientDetails from './ingredient-details.module.css';
-import PropTypes from 'prop-types';
-import { typeOfingredient } from '../../utils/propTypes';
 
 const IngredientDetails = (props) => {
   return (

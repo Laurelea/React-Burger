@@ -5,27 +5,29 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import { AppHeader } from '../app-header/app-header';
 import { connect } from "react-redux";
 import { getAllIngredients } from "../../services/actions";
-import { setAllIngredients } from "../../services/rootReducer"
+// import { DndProvider } from 'react-dnd'
+// import { HTML5Backend } from 'react-dnd-html5-backend'
 
 const App = (props) => {
-  console.log(11, props)
-  useEffect(() => {
-    props.getAllIngredients();
-  }, [])
+    console.log(11, props)
+    useEffect(() => {
+        props.getAllIngredients();
+    }, [])
 
-  return (
-    <>
-      <AppHeader />
-      {props.allIngredients && props.allIngredients.length && (
-        <main className={appStyles.mainGrid}>
-          <BurgerIngredients data={props.allIngredients} />
-          <BurgerConstructor data={props.allIngredients} />
-        </main>
-      )}
-    </>
-  );
+    return (
+        <>
+            <AppHeader/>
+            {props.allIngredients && props.allIngredients.length && (
+                <main className={appStyles.mainGrid}>
+                    <BurgerIngredients data={props.allIngredients}/>
+                    <BurgerConstructor data={props.curIngredientsList}/>
+                </main>
+            )}
+        </>
+    );
 }
 
 export default connect(state => ({
-    allIngredients: state.slice.allIngredients
+    allIngredients: state.slice.allIngredients,
+    curIngredientsList: state.slice.curIngredientsList,
 }), { getAllIngredients })(App);

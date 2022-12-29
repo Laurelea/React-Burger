@@ -1,10 +1,12 @@
 import { URL_API } from "../utils/constants";
 import { Dispatch } from 'redux'
-import {
-    GETALL,
-} from "./types";
-import { setAllIngredients } from "./rootReducer"
+import { GETALL, SETCURI } from "./rootReducer"
 import { createAction } from "@reduxjs/toolkit";
+
+// импорт для классического редуктора
+// import {
+//     GETALL,
+// } from "./types";
 
 export const getAllIngredients = () => (dispatch: Dispatch) => {
     fetch(URL_API)
@@ -17,17 +19,20 @@ export const getAllIngredients = () => (dispatch: Dispatch) => {
     })
     .then((res) => {
         console.log(21, res)
+        // способ диспатча для классического редуктора
         // dispatch(({
         //     type: GETALL,
         //     payload: res.data
         // }));
-        dispatch(setAllIngredients(res.data));
+        dispatch(GETALL(res.data));
     })
     .catch((err) => console.error(err));
 }
 
-// export const getAllIngredients = createAction("GETALL")
+// какой-то новый, но не оптимальный способ
+export const setCurI = createAction("SETCURI")
 
+// тоже какой-то неоптимальный способ
 // const getAllIngredients = counterSlice(
 //     { value: 10 },
 //     setAllIngredients()
