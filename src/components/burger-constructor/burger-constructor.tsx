@@ -6,7 +6,6 @@ import {
     CurrencyIcon,
     Counter,
     Button,
-    DeleteIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesForBurgerConstructor from './burger-constructor.module.css';
 import Modal from '../modal/modal';
@@ -55,6 +54,7 @@ const BurgerConstructor = (props: IBCProps) => {
     const closeOrderModal = () => setOrderModalVis(false);
 
     const bun = props.data.filter((i: IIngredient) => i.type === 'bun')[0]
+    console.log(58, bun)
 
     const orderSum = props.data
         .filter((i: IIngredient) => i.type != 'bun')
@@ -162,11 +162,7 @@ const BurgerConstructor = (props: IBCProps) => {
                     text={props.ingredient.name}
                     price={props.ingredient.price}
                     thumbnail={props.ingredient.image}
-                    // handleClose={dispatch(REMOVE(ingredient._id))}
-                />
-                <DeleteIcon
-                    type="secondary"
-                    onClick={() => dispatch(REMOVE(props.ingredient._id))}
+                    handleClose={() => dispatch(REMOVE(props.ingredient._id))}
                 />
             </li>
         )
@@ -188,20 +184,15 @@ const BurgerConstructor = (props: IBCProps) => {
         >
             {bun &&
                 <div
-                    // className={`ml-8`}
-                    // onClick={() => dispatch(REMOVE(bun._id))}
                     className={`${stylesForBurgerConstructor.listItem} mb-4`}
                     >
                     <ConstructorElement
                         type="top"
-                        // isLocked={true}
+                        isLocked={true}
                         text={bun.name}
                         price={bun.price}
                         thumbnail={bun.image}
-                    />
-                    <DeleteIcon
-                        type="secondary"
-                        onClick={() => dispatch(REMOVE(bun._id))}
+                        handleClose={() => dispatch(REMOVE(bun._id))}
                     />
                 </div>}
             <ul className={`${stylesForBurgerConstructor.list}`}>
@@ -213,20 +204,15 @@ const BurgerConstructor = (props: IBCProps) => {
             </ul>
             {bun &&
                 <div
-                    // className={`ml-8`}
-                    // onClick={() => dispatch(REMOVE(bun._id))}
                     className={`${stylesForBurgerConstructor.listItem} mb-4`}
                 >
                     <ConstructorElement
                         type="bottom"
-                        // isLocked={true}
+                        isLocked={true}
                         text={bun.name}
                         price={bun.price}
                         thumbnail={bun.image}
-                    />
-                    <DeleteIcon
-                        type="secondary"
-                        onClick={() => dispatch(REMOVE(bun._id))}
+                        handleClose={() => dispatch(REMOVE(bun._id))}
                     />
                 </div>}
             <div className={`${stylesForBurgerConstructor.checkWrapper} mt-10`}>
