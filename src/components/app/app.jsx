@@ -9,7 +9,7 @@ import { getAllIngredients } from "../../services/actions";
 // import { HTML5Backend } from 'react-dnd-html5-backend'
 
 const App = (props) => {
-    console.log(11, props)
+    // console.log(11, props)
     useEffect(() => {
         props.getAllIngredients();
     }, [])

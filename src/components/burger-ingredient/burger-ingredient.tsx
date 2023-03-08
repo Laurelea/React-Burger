@@ -24,20 +24,25 @@ const BurgerIngredient = (props: IBIProps) => {
 
     const counter = useAppSelector((state: { slice: IState }) => getCounter(state, props.data._id));
 
-    const [{isDragging}, drag] = useDrag(() => ({
+    const [{ isDragging }, dragRef] = useDrag({
         type: ItemTypes.INGREDIENT,
         item: props.data,
+        end: (item , monitor) => {
+            const dropResult = monitor.getDropResult();
+            console.log(32, dropResult)
+        },
         collect: (monitor) => ({
-            isDragging: !!monitor.isDragging()
+            isDragging: monitor.isDragging()
         })
-    }))
+    })
 
     return (
         <div
-            ref={drag}
+            ref={dragRef}
             style={{
               opacity: isDragging ? 0.5 : 1,
             }}
+            draggable
             className={`${stylesForBurgeringredient.ingredientWrap}`}
             id={props.data._id}
             onClick={() => props.openModalIngredient(props.data)}

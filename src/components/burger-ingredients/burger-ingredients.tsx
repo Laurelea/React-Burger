@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 // import PropTypes from 'prop-types';
 // import { typeOfingredient } from '../../utils/propTypes.js';
-import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesForBurgeringredients from './burger-ingredients.module.css';
 import BurgerIngredient from '../burger-ingredient/burger-ingredient';
 import Modal from '../modal/modal.jsx';
 import IngredientDetails from '../ingredient-details/ingredient-details.jsx';
-import {IIngredient} from "../../utils/types";
-import { useAppSelector, useAppDispatch} from '../../services/hooks'
-import {SETCURI, DELCURI, ADD} from "../../services/rootReducer";
+import { IIngredient } from "../../utils/types";
+import { useAppSelector, useAppDispatch } from '../../services/hooks'
+import { SETCURI, DELCURI, ADD } from "../../services/rootReducer";
 
 interface IBIsProps {
     data: IIngredient[]

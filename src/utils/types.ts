@@ -12,3 +12,9 @@ export interface IIngredient {
     type: 'bun' | 'main' | 'sauce',
     proteins: number,
 };
+
+export interface DragComponent {
+    index: number,
+    id: string,
+    type: IIngredient
+}
