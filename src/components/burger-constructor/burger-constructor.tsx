@@ -12,17 +12,20 @@ import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import { useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "../../services/types";
-import { useAppDispatch } from '../../services/hooks'
+import { useAppDispatch } from '../../services/hooks';
+import { useSelector } from 'react-redux';
 import { ADD, REMOVE } from "../../services/rootReducer";
 import BurgerComponent from "../constructor-element-draggable/constructor-element-draggable";
 
 interface IBCProps {
-    data: IIngredient[]
+    curIngredientsList: IIngredient[],
+    bun: IIngredient | null,
 }
 
 const BurgerConstructor = (props: IBCProps) => {
+    console.log(26, props)
     const dispatch = useAppDispatch()
-    // const closeOrderModal = () => setOrderModalVis(false);
+    const closeOrderModal = () => setOrderModalVis(false);
 
     const [{ isOver }, dropRef] = useDrop({
         accept: ItemTypes.INGREDIENT,
@@ -32,40 +35,20 @@ const BurgerConstructor = (props: IBCProps) => {
         }),
     })
 
-    // const [{ isCompOver }, dropComponent] = useDrop(
-    //     () => ({
-    //         accept: ItemTypes.INGREDIENT,
-    //         // drop: (ingredient: IIngredient) => dispatch(ADD(ingredient)),
-    //         drop: () => {
-    //             console.log('DROPPED!')
-    //         },
-    //         collect: (monitor) => ({
-    //             isCompOver: !!monitor.isOver(),
-    //         }),
-    //     }),
-    //     // [ingredient]
-    // )
+    const [isOrderModalVis, setOrderModalVis] = useState(false);
+    // const orderNumber = useSelector((store: any) => store.order.order);
 
-    // const [isOrderModalVis, setOrderModalVis] = useState(false);
 
-    const bun = props.data.filter((i: IIngredient) => i.type === 'bun')[0]
-    const orderSum = props.data
-        .filter((i: IIngredient) => i.type != 'bun')
+    // const bun = props.curIngredientsList.filter((i: IIngredient) => i.type === 'bun')[0]
+    const bun = props.bun;
+    // .filter((i: IIngredient) => i.type != 'bun')
+    const orderSum = props.curIngredientsList ? props.curIngredientsList
         .reduce((sum: number, i: IIngredient) => {
             sum += i.price;
             return sum
-        }, 0) + (bun && bun.price || 0) * 2
+        }, 0) + (bun && bun.price || 0) * 2 : 0
 
-    // const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
-    //     setCards((prevCards: Item[]) =>
-    //         update(prevCards, {
-    //             $splice: [
-    //                 [dragIndex, 1],
-    //                 [hoverIndex, 0, prevCards[dragIndex] as Item],
-    //             ],
-    //         }),
-    //     )
-    // }, [])
+
 
     return (
         <section
@@ -85,13 +68,13 @@ const BurgerConstructor = (props: IBCProps) => {
                         text={bun.name}
                         price={bun.price}
                         thumbnail={bun.image}
-                        handleClose={() => dispatch(REMOVE(bun._id))}
+                        handleClose={() => dispatch(REMOVE({ id: bun._id, type: 'bun' }))}
                     />
                 </div>}
             <ul className={`${stylesForBurgerConstructor.list}`} style={{
                     border: '2px solid blue'}}>
-                {props.data.length ? props.data
-                    .filter((i: IIngredient) => i.type != 'bun')
+                {props.curIngredientsList.length ? props.curIngredientsList
+                    // .filter((i: IIngredient) => i.type != 'bun')
                     .map((ingredient:IIngredient, index: number) => (
                         <BurgerComponent
                             key={ingredient._id + index.toString()}
@@ -111,29 +94,28 @@ const BurgerConstructor = (props: IBCProps) => {
                         text={bun.name}
                         price={bun.price}
                         thumbnail={bun.image}
-                        handleClose={() => dispatch(REMOVE(bun._id))}
+                        handleClose={() => dispatch(REMOVE({ id: bun._id, type: 'bun' }))}
                     />
                 </div>}
-            {/*<div className={`${stylesForBurgerConstructor.checkWrapper} mt-10`}>*/}
-            {/*    <div className={`${stylesForBurgerConstructor.checkSummary}`}>*/}
-            {/*        <p className={`text text_type_digits-medium mr-2`}>{orderSum}</p>*/}
-            {/*        <CurrencyIcon type="primary"/>*/}
-            {/*        <span className={`text text_type_digits-medium ml-10`}></span>*/}
-            {/*        <Button*/}
-            {/*            htmlType="button"*/}
-            {/*            type="primary"*/}
-            {/*            size="large"*/}
-            {/*            onClick={() => {*/}
-            {/*                setOrderModalVis(true);*/}
-            {/*            }}*/}
-            {/*        >*/}
-            {/*            Оформить заказ*/}
-            {/*        </Button>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            {/*<Modal isActive={isOrderModalVis} closeModal={closeOrderModal}>*/}
-            {/*    /!*<OrderDetails closeModal={closeOrderModal} />*!/*/}
-            {/*    <OrderDetails/>*/}
+            <div className={`${stylesForBurgerConstructor.checkWrapper} mt-10`}>
+                <div className={`${stylesForBurgerConstructor.checkSummary}`}>
+                    <p className={`text text_type_digits-medium mr-2`}>{orderSum}</p>
+                    <CurrencyIcon type="primary"/>
+                    <span className={`text text_type_digits-medium ml-10`}></span>
+                    <Button
+                        htmlType="button"
+                        type="primary"
+                        size="large"
+                        onClick={() => {
+                            setOrderModalVis(true);
+                        }}
+                    >
+                        Оформить заказ
+                    </Button>
+                </div>
+            </div>
+            {/*<Modal closeModal={closeOrderModal}>*/}
+                {/*<OrderDetails orderNumber={orderNumber}  />*/}
             {/*</Modal>*/}
         </section>
     );

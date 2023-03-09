@@ -117,7 +117,7 @@ const BurgerIngredients = (props: IBIsProps) => {
                     </li>
                 )}
             </ul>
-            <Modal isActive={isModalIngredientOpen} closeModal={closeModalIngredient}>
+            <Modal closeModal={closeModalIngredient}>
                 <IngredientDetails data={selectedIngredient}/>
             </Modal>
         </section>

@@ -4,7 +4,7 @@ import {
     ConstructorElement,
     DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import {useDrop, useDrag, DropTargetMonitor} from 'react-dnd';
+import { useDrop, useDrag, DropTargetMonitor } from 'react-dnd';
 import styles from './constructor-element-draggable.module.css';
 import { useDispatch } from 'react-redux';
 // import { reorderConstructor } from '../../services/actions/ingr-in-constructor-actions';
@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import { IIngredient, DragComponent } from "../../utils/types";
 import { ItemTypes } from "../../services/types";
 import stylesForBurgerConstructor from "../burger-constructor/burger-constructor.module.css";
-import { REMOVE } from "../../services/rootReducer";
+import { ADD, REMOVE, REORDER } from "../../services/rootReducer";
 import { useAppDispatch } from "../../services/hooks";
 
 export interface IBCProps {
@@ -25,15 +25,12 @@ const BurgerComponent: FC<IBCProps> = (props) => {
     // console.log(18, props.index)
     // console.log(19, props.id)
     const dispatch = useAppDispatch()
-    const moveCard = () => (console.log("MOVE"))
-
+    const moveCard = (dragIndex: number, hoverIndex: number) => {
+        console.log("MOVE", dragIndex, hoverIndex);
+        dispatch(REORDER({ dragIndex, hoverIndex }));
+    }
     const ref = useRef<HTMLLIElement>(null)
 
-//             <
-//             DragComponent,
-//         void,
-//         { handlerId: string | symbol | null }
-// >
     const [{ handlerId }, dropMove] = useDrop<
         DragComponent,
         void,
@@ -81,7 +78,7 @@ const BurgerComponent: FC<IBCProps> = (props) => {
                 return;
             }
             // Time to actually perform the action
-            moveCard()
+            moveCard(dragIndex, hoverIndex)
 
             item.index = hoverIndex;
         }
@@ -122,7 +119,7 @@ const BurgerComponent: FC<IBCProps> = (props) => {
                 text={props.ingredient.name}
                 price={props.ingredient.price}
                 thumbnail={props.ingredient.image}
-                handleClose={() => dispatch(REMOVE(props.ingredient._id))}
+                handleClose={() => dispatch(REMOVE({ id: props.ingredient._id, type: props.ingredient.type }))}
             />
         </li>
     )

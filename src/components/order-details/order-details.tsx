@@ -6,7 +6,7 @@ import { IState, selectCurOrder} from "../../services/rootReducer";
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 
-const OrderDetails = () => {
+const OrderDetails = (orderNumber: any) => {
     // const currentOrder = useSelector(selectCurOrder)
 
     // способ проще: не нужно создавать отдельный функции на забор каждого компонента state:

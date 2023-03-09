@@ -20,7 +20,7 @@ const App = (props) => {
             {props.allIngredients && props.allIngredients.length && (
                 <main className={appStyles.mainGrid}>
                     <BurgerIngredients data={props.allIngredients}/>
-                    <BurgerConstructor data={props.curIngredientsList}/>
+                    <BurgerConstructor curIngredientsList={props.curIngredientsList} bun={props.bun}/>
                 </main>
             )}
         </>
@@ -30,4 +30,5 @@ const App = (props) => {
 export default connect(state => ({
     allIngredients: state.slice.allIngredients,
     curIngredientsList: state.slice.curIngredientsList,
+    bun: state.slice.bun,
 }), { getAllIngredients })(App);

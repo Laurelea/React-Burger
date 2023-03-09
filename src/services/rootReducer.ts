@@ -27,6 +27,7 @@ import { IIngredient } from "../utils/types";
 export interface IState {
     allIngredients: IIngredient[];
     curIngredientsList: IIngredient[];
+    bun: IIngredient | null;
     curIngredient: IIngredient | {};
     curOrder: number | undefined;
     lastOrder: number;
@@ -38,6 +39,7 @@ const burgerSlice = createSlice({
     initialState : {
         allIngredients: [],
         curIngredientsList: [],
+        bun: null,
         curIngredient: {} as IIngredient,
         curOrder: undefined,
         lastOrder: 0
@@ -53,16 +55,35 @@ const burgerSlice = createSlice({
         ADD(state, action: PayloadAction<IIngredient>) {
             console.log('ADD', action.payload)
             if (action.payload.type === 'bun') {
-                state.curIngredientsList = state.curIngredientsList.filter((i: IIngredient) => i.type != 'bun')
+                // state.curIngredientsList = state.curIngredientsList.filter((i: IIngredient) => i.type != 'bun')
+                console.log(59!!)
+                state.bun = action.payload;
+            } else {
+                state.curIngredientsList.push(action.payload)
             }
-            state.curIngredientsList.push(action.payload)
             state.curOrder = state.curOrder || state.lastOrder + 1
+            console.log(65, state.bun)
         },
-        REMOVE(state, action: PayloadAction<string>) {
-            const index = state.curIngredientsList.findIndex((i : IIngredient) => i._id === action.payload)
-            console.log("REMOVE", action.payload, index)
-            if (index !== -1) {
-                state.curIngredientsList.splice(index, 1);
+        REORDER(state, action: PayloadAction<{ dragIndex: number, hoverIndex: number }>) {
+            const tempList = [...state.curIngredientsList];
+            [
+                tempList[action.payload.hoverIndex],
+                tempList[action.payload.dragIndex]
+            ] = [
+                tempList[action.payload.dragIndex],
+                tempList[action.payload.hoverIndex]
+            ];
+            state.curIngredientsList = tempList;
+        },
+        REMOVE(state, action: PayloadAction<{ id: string, type: string }>) {
+            console.log("REMOVE", action.payload.id)
+            if (action.payload.type === 'bun') {
+                state.bun = null;
+            } else {
+                const index = state.curIngredientsList.findIndex((i : IIngredient) => i._id === action.payload.id)
+                if (index !== -1) {
+                    state.curIngredientsList.splice(index, 1);
+                }
             }
         },
         SETCURI(state, action: PayloadAction<IIngredient>) {
@@ -89,5 +110,5 @@ export const selectCurOrder = (state: IState) => state.curOrder
 
 // export default burgerSlice.reducer;
 const { actions, reducer } = burgerSlice;
-export const { GETALL, ADD, SETCURI, DELCURI, REMOVE }  = actions;
+export const { GETALL, ADD, SETCURI, DELCURI, REMOVE, REORDER } = actions;
 export default reducer;
